@@ -57,14 +57,14 @@ class Statistics:
         ax[0].ticklabel_format(useOffset=False, style='plain')
         ax[0].scatter(self.selections, self.relations)
         ax[0].set_title("Процент женщин от общего количества")
-        ax[0].set_xlabel("Размер выборки")
-        ax[0].set_ylabel("Процент женщин")
 
         ax[1].ticklabel_format(useOffset=False, style='plain')
         ax[1].scatter(self.selections[:100], self.relations[:100])
         ax[1].set_title("Процент женщин от общего количества (Размеры выборок от 100 до 10000)")
-        ax[1].set_xlabel("Размер выборки")
-        ax[1].set_ylabel("Процент женщин")
+
+        for a in ax:
+            a.set_xlabel("Размер выборки")
+            a.set_ylabel("Процент женщин")
 
         figure.set_figwidth(sizeByWidth)
         figure.set_figheight(sizeByHeight)
