@@ -53,22 +53,29 @@ class Statistics:
                 self.relations = pickle.load(f)
 
     def Plotting(self, sizeByWidth: int, sizeByHeight: int, outputImage: str):
-        fig, ax = plt.subplots()
+        figure, ax = plt.subplots(2, 1)
 
-        ax.ticklabel_format(useOffset=False, style='plain')
+        ax[0].ticklabel_format(useOffset=False, style='plain')
+        ax[0].scatter(self.selections, self.relations)
+        ax[0].set_title("Процент женщин от общего количества")
+        ax[0].set_xlabel("Размер выборки")
+        ax[0].set_ylabel("Процент женщин")
 
-        self.relations = [100 - i for i in self.relations]
-        ax.scatter(self.selections, self.relations)
+        ax[1].ticklabel_format(useOffset=False, style='plain')
+        ax[1].scatter(self.selections[:100], self.relations[:100])
+        ax[1].set_title("Процент женщин от общего количества (Размеры выборок от 100 до 10000)")
+        ax[1].set_xlabel("Размер выборки")
+        ax[1].set_ylabel("Процент женщин")
 
-        plt.title('Процент женщин от мужчин')
-        plt.xlabel("Количество выборки")
-        plt.ylabel("Процент женщин")
-
-        fig.set_figwidth(sizeByWidth)
-        fig.set_figheight(sizeByHeight)
+        figure.set_figwidth(sizeByWidth)
+        figure.set_figheight(sizeByHeight)
 
         plt.draw()
         plt.savefig(outputImage)
         plt.show()
+
         print("Количесто точек: " + str(len(self.relations)))
+        print("Процент мужчин от общего количества: " + str(100 - self.relations[-1]))
+        print("Процент женщин от общего количества: " + str(self.relations[-1]))
+        print("Шаг выборки: " + str(self.samplingStep))
         print("Среднее значение: " + str(sum(self.relations) / len(self.relations)))
