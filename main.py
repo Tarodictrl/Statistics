@@ -5,5 +5,5 @@ if __name__ == '__main__':
                                        "Datasets/DatasetRelations.pkl", 100, 100, "F")
     statistics.GetDatasetSex(False)
     statistics.GetDatasetRelations(False)
-    statistics.Plotting(20, 20, 20, "image.png")
+    statistics.Plotting(20, 20, "image.png")
 

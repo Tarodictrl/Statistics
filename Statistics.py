@@ -2,7 +2,6 @@ from __future__ import annotations
 import pickle
 import csv
 import matplotlib.pyplot as plt
-import numpy as np
 
 
 def percentage(part: int, whole: int) -> float:
@@ -10,8 +9,8 @@ def percentage(part: int, whole: int) -> float:
 
 
 class Statistics:
-    def __init__(self, inputDataset: str | bytes,
-                 outputDatasetSex: str | bytes,
+    def __init__(self, inputDataset: str,
+                 outputDatasetSex: str,
                  outputDatasetRelations: str | bytes,
                  firstNumberSampling: int,
                  samplingStep: int,
@@ -37,7 +36,8 @@ class Statistics:
                 pickle.dump(self.datasetSex, f)
 
     def GetDatasetRelations(self, overwrite: bool):
-        self.selections = [s for s in range(self.firstNumberSampling, len(self.datasetSex), self.samplingStep)]
+        self.selections = [s for s in range(self.firstNumberSampling,
+                                            len(self.datasetSex), self.samplingStep)]
         if overwrite:
             for i in self.selections:
                 sel = self.datasetSex[0:i]
@@ -52,13 +52,12 @@ class Statistics:
             with open(self.outputDatasetRelations, 'rb') as f:
                 self.relations = pickle.load(f)
 
-    def Plotting(self, sizeByWidth: int, sizeByHeight: int, numberOfValuesAbscissa: int, outputImage: str):
+    def Plotting(self, sizeByWidth: int, sizeByHeight: int, outputImage: str):
         fig, ax = plt.subplots()
 
         ax.ticklabel_format(useOffset=False, style='plain')
 
-        plt.xticks(np.linspace(0, len(self.relations), numberOfValuesAbscissa))
-
+        self.relations = [100 - i for i in self.relations]
         ax.scatter(self.selections, self.relations)
 
         plt.title('Процент женщин от мужчин')
