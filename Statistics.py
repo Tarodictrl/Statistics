@@ -70,6 +70,6 @@ class Statistics:
 
         plt.draw()
         plt.savefig(outputImage)
-
+        plt.show()
         print("Количесто точек: " + str(len(self.relations)))
         print("Среднее значение: " + str(sum(self.relations) / len(self.relations)))
