@@ -1,4 +1,3 @@
-from __future__ import annotations
 import pickle
 import csv
 import matplotlib.pyplot as plt
@@ -11,7 +10,7 @@ def percentage(part: int, whole: int) -> float:
 class Statistics:
     def __init__(self, inputDataset: str,
                  outputDatasetSex: str,
-                 outputDatasetRelations: str | bytes,
+                 outputDatasetRelations: str,
                  firstNumberSampling: int,
                  samplingStep: int,
                  gender: str):
